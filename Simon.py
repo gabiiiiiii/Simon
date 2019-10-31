@@ -1,5 +1,5 @@
 import subprocess
-def kitchen(): 
+def kitchen():
     print "In the Kitchen you see a Fridge, Stove, and Table ... "
     bool = True
     while True:
@@ -41,6 +41,7 @@ def kitchen():
                 global letterCount
                 letterCount += 1
                 bool = False
+		isDone()
             else: print "\nYou already read this letter ..."
 
 #add in stuff for reading letter twice etc ... ADD COUNTER, for first letter, write some specific statements etc
@@ -63,7 +64,30 @@ def kitchen():
  	        print"\nInvalid choice\n"
 
 def garage():
+    global endGlobal
+    if endGlobal == True:
+        striiing = """
+                  / )
+  (\__/)         ( (
+  )    (          ) )
+={      }=       / /
+  )     `-------/ /
+ (               /
+  \              |
+ ,'\       ,    ,'
+ `-'\  ,---\   | \
+    _) )    `. \ /
+   (__/       ) )   
+             (_/
+        """
+        print striiing
+
+        print "Hey Karl meet my cat Simon"
+	
+        subprocess.call(["afplay","final.mp3"])
+        return
     print "In the Garage you see Sophia's car is missing, the concrete is cool on your feet, where did she go?"
+
     while True:
         inputVal = input("Your choices are:\n1.Look through the window\n2.Return to Hallway\nSelect choice: ")
         if inputVal==1:
@@ -128,6 +152,7 @@ def livingRoom():
                 global letterCount
                 letterCount += 1
                 bool = False
+		isDone()
             else: print "You see the couch with the letter you already read ..."
         elif inputVal==3:
             print "        _______________________"
@@ -182,7 +207,8 @@ def bathroom():
                 global letterCount
                 letterCount += 1
                 bool = False
-            else: 
+		isDone()
+            else:
                 print "You look at the bathtub and dip your foot in the water, it is cold and you are now upset"
                 print "to the side of the tub you see the letter you already read ..."
         elif inputVal==3:
@@ -217,6 +243,7 @@ def bedroom():
                 global letterCount
                 letterCount += 1
                 bool = False
+		isDone()
             else: print "You look at the dresser, and find the letter that you've a letter already read ..."
         elif inputVal==3:
             print "You look at the nightstand, there is a cute picture of you and Sophia."
@@ -225,20 +252,20 @@ def bedroom():
             return
         else:
 	        print"\nInvalid choice\n"
-	
+
 def energyBar():
     global energy
     print "Energy Level ",energy,"%"
 
 def hallway():
-    
+
     while True:
         print "\nYou are in the hallway\n"
         energyBar()
         global energy
         if energy == 0:
+            print "\nSimon closes his eyes and begins to drift away ... his eyes do not open again.\n"
             subprocess.call(["afplay","death.mp3"])
-            print "\nSimon closes his eyes and begins to drift away ... his eyes do not open again.\n"     
             return
         print "Your choices are:\n1.Bedroom\n2.Bathroom\n3.Kitchen\n4.Garage\n5.Window\n6.Living Room\n7.Nap"
         inputVal = input("\nEnter your choice: ")
@@ -267,14 +294,21 @@ def nap():
    print "Napping..."
    energy = 110
 
-def letter(letter): 
+def isDone():
+    global endGlobal
+    if letterCount == 5:
+        print "You hear a car pull up *vroom vroom*. You think you should go to the garage."
+        endGlobal = True
+
+
+def letter(letter):
     if letter == 1:
         print "Dear Sophia,\nI had an amazing time with you today. I am so glad that we were\nable to connect. I would love nothing more than to see you again in the\nnear furture ...\nWarmly,\nKarl"
         print "*KARL! Who is this KARL. I must find out more information ... but why would Sophia hide\nthis from me?*"
         subprocess.call(["afplay","first.mp3"])
     elif letter == 2:
         print "Dearest Sophia,\nI am so happy that we were able to meet up again! I am so grateful for your presence.\nYou are the love that came without warning; you had my heart before I could say no!\nLove,\nKarl"
-        print "*They met up again! My hear is breaking ... Sophia ...*"
+        print "*They met up again! My heart is breaking ... Sophia ...*"
         subprocess.call(["afplay","third.mp3"])
     elif letter == 3:
         print "Sophia!\nNo mountain, nor sea, no thing of this world could keep us apart, because this\nis not my world. You are! I think it is finally time to say, I LOVE YOU!\nLove,\nKarl <3"
@@ -290,8 +324,8 @@ print"            Wake up Simon"
 print"-----------------------------------------"
 print"    you wake up in the hallway. why did you fall asleep here? you stand up and stretch."
 print"Where is Sophia? you need to find out where she went. better investigate.              "
-energy=100
+energy=60
 letterCount = 1
 boolGlobal = True
+endGlobal = False
 hallway()
-
